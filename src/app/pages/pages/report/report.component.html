@@ -201,6 +201,18 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Bu Yıl Net Kargo </th>
         <td class="cell"mat-cell *matCellDef="let element"> {{element.currentYearNetKargo}} </td>
       </ng-container>
+      <ng-container matColumnDef="lastYearPXP">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Geçen Yıl PXP </th>
+        <td class="cell"mat-cell *matCellDef="let element"> {{element.lastYearPXP}} </td>
+      </ng-container>
+      <ng-container matColumnDef="currentYearPXP">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Bu Yıl PXP </th>
+        <td class="cell"mat-cell *matCellDef="let element"> {{element.currentYearPXP}} </td>
+      </ng-container>
+      <ng-container matColumnDef="lastYearTotal">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Son Yıl Toplam </th>
+        <td class="cell"mat-cell *matCellDef="let element"> {{element.lastYearTotal}} </td>
+      </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row class="hover:bg-hover trans-ease-out cursor-pointer" *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>

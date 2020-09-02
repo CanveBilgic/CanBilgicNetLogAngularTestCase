@@ -70,7 +70,7 @@ export class ReportComponent implements OnInit, AfterViewInit, OnDestroy {
   dailyData: DailyReportResponseModel[];
 
   @Input()
-  displayedColumns: string[] = ['day', 'lastYearNetKargo', 'currentYearNetKargo'];
+  displayedColumns: string[] = ['day', 'lastYearNetKargo', 'currentYearNetKargo', 'lastYearPXP', 'currentYearPXP', 'lastYearTotal'];
   pageSize = 10;
   totalPosts = 10;
   pageSizeOptions: number[] = [5, 10, 20, 50];
