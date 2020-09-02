@@ -1,6 +1,6 @@
 
 <h2 style="height: 60px; line-height: 60px; margin-left: 70px; font-weight: 500; border: none;">VEX Template'inin giydirilmesi</h2>
-
+Proje çalışır durumda, bir problem olursa iletişime geçerseniz sevinirim.
 <h2>Karşılaşılan Problemler</h2>
 - Refresh metodu bulunmadığı için entegre edilen token refresh kaldırıldı. Başlangıç'a login eklendi fakat ilk requestte sağlıksız çalışıyor. Sayfayı yenilemek gerekiyor. 
 - Grafik gösterimi konusunda anlayamadığım kısımlar oldu. MonthlyReport servisini kullanmam beklenmiyordu sanırım ama önce anlayamayıp entegre ettim, sonrasında comment'e aldım. <br />
