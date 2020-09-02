@@ -1,0 +1,210 @@
+<form [formGroup]="reportForm" (ngSubmit)="onSubmit()">
+  <mat-card>
+    <mat-grid-list [cols]="colsBreakpoint" rowHeight="100px" (window:resize)="onResize($event)">
+      <mat-grid-tile>
+        <div>
+          <h4>Koordinatörlük</h4>
+          <mat-form-field>
+            <mat-select placeholder="Seçiniz" formControlName="coordinator" multiple>
+              <mat-select-trigger>
+                {{reportForm.controls.coordinator.value ? reportForm.controls.coordinator.value[0].koordinatorAdi : ''}}
+                <span *ngIf="reportForm.controls.coordinator.value?.length > 1" class="example-additional-selection">
+              (+{{reportForm.controls.coordinator.value.length - 1}} {{'koordinatör'}})
+              </span>
+              </mat-select-trigger>
+              <mat-option (onSelectionChange)="toggleAllSelection(coordinatorList, $event)"
+                          [value]="'0'">Tümünü Seç
+              </mat-option>
+              <mat-option *ngFor="let coordinator of coordinatorList"
+                          [value]="coordinator">
+                {{coordinator.koordinatorKodu + ' - ' + coordinator.koordinatorAdi}}
+              </mat-option>
+            </mat-select>
+            <mat-error>Lütfen koordinatör seçiniz.</mat-error>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div>
+          <h4>Bölge</h4>
+          <mat-form-field>
+            <mat-select placeholder="Bölge" formControlName="region" multiple>
+              <mat-select-trigger>
+                {{reportForm.controls.region.value ? reportForm.controls.region.value[0].bolgeAdi : ''}}
+                <span *ngIf="reportForm.controls.region.value?.length > 1" class="example-additional-selection">
+              (+{{reportForm.controls.region.value.length - 1}} {{'bölge'}})
+              </span>
+              </mat-select-trigger>
+              <mat-option (onSelectionChange)="toggleAllSelection(regionList, $event)" [value]="'0'">Tümünü Seç
+              </mat-option>
+              <mat-option *ngFor="let region of regionList"
+                          [value]="region">
+                {{region.bolgeKodu + ' - ' + region.bolgeAdi}}</mat-option>
+            </mat-select>
+            <mat-error>Lütfen bölge seçiniz.</mat-error>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div>
+          <h4>Çıkış Depo</h4>
+          <mat-form-field>
+            <mat-select placeholder="Çıkış Depo" formControlName="departureStoreHouse" multiple>
+              <mat-select-trigger>
+                {{reportForm.controls.departureStoreHouse.value ? reportForm.controls.departureStoreHouse.value[0].depoAdi : ''}}
+                <span *ngIf="reportForm.controls.departureStoreHouse.value?.length > 1"
+                      class="example-additional-selection">
+              (+{{reportForm.controls.departureStoreHouse.value.length - 1}} {{'depo'}})
+              </span>
+              </mat-select-trigger>
+              <mat-option (onSelectionChange)="toggleAllSelection(storeHouseList, $event)" [value]="'0'">Tümünü Seç
+              </mat-option>
+              <mat-option *ngFor="let storeHouse of storeHouseList"
+                          [value]="storeHouse">
+                {{storeHouse.depoKodu + ' - ' + storeHouse.depoAdi}}</mat-option>
+            </mat-select>
+            <mat-error>Lütfen çıkış deposu seçiniz.</mat-error>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div>
+          <h4>Varış Depo</h4>
+          <mat-form-field>
+            <mat-select placeholder="Varış Depo" formControlName="destinationStoreHouse" multiple>
+              <mat-select-trigger>
+                {{reportForm.controls.destinationStoreHouse.value ? reportForm.controls.destinationStoreHouse.value[0].depoAdi : ''}}
+                <span *ngIf="reportForm.controls.destinationStoreHouse.value?.length > 1"
+                      class="example-additional-selection">
+              (+{{reportForm.controls.destinationStoreHouse.value.length - 1}} {{'depo'}})
+              </span>
+              </mat-select-trigger>
+              <mat-option (onSelectionChange)="toggleAllSelection(storeHouseList, $event)" [value]="'0'">Tümünü Seç
+              </mat-option>
+              <mat-option *ngFor="let storeHouse of storeHouseList"
+                          [value]="storeHouse">
+                {{storeHouse.depoKodu + ' - ' + storeHouse.depoAdi}}</mat-option>
+            </mat-select>
+            <mat-error>Lütfen varış deposu seçiniz.</mat-error>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div>
+          <h4>Teslimat Tipi</h4>
+          <mat-form-field>
+            <mat-select placeholder="Teslimat Tipi" formControlName="deliveryType" multiple>
+              <mat-select-trigger>
+                {{reportForm.controls.deliveryType.value ? reportForm.controls.deliveryType.value[0].teslimatTipiAdi : ''}}
+                <span *ngIf="reportForm.controls.deliveryType.value?.length > 1" class="example-additional-selection">
+              (+{{reportForm.controls.deliveryType.value.length - 1}} {{'teslimat tipi'}})
+              </span>
+              </mat-select-trigger>
+              <mat-option #deliveryType (onSelectionChange)="toggleAllSelection(deliveryTypeList, $event)"
+                          [value]="'0'">
+                Tümünü Seç
+              </mat-option>
+              <mat-option *ngFor="let deliveryType of deliveryTypeList"
+                          [value]="deliveryType">
+                {{deliveryType.teslimatTipiKodu + ' - ' + deliveryType.teslimatTipiAdi}}</mat-option>
+            </mat-select>
+            <mat-error>Lütfen teslimat tipi seçiniz.</mat-error>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div>
+          <h4>Başlangıç Bitiş Tarihi</h4>
+          <mat-form-field>
+            <mat-label>Seçiniz</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate placeholder="Start date" formControlName="startDate">
+              <input matEndDate placeholder="End date" formControlName="endDate">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+            <mat-error
+              *ngIf="reportForm.controls.startDate.hasError('matStartDateInvalid') || reportForm.controls.endDate.hasError('matEndDateInvalid')">
+              Hatalı tarih seçtiniz.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div class="buttonToggle">
+          <h4>Grafik Gösterimi</h4>
+          <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="dailyToggle" multiple="true">
+            <mat-button-toggle value="daily">Günlük</mat-button-toggle>
+            <mat-button-toggle value="monthly">Aylık</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <button mat-raised-button
+                type="submit"
+                color="primary"
+                style="">Güncelle
+        </button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card>
+  <br/>
+  <mat-card  *ngIf="dailyChartDataReady">
+    <div id="chart">
+      <apx-chart
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [yaxis]="chartOptions.yaxis"
+        [xaxis]="chartOptions.xaxis"
+        [labels]="chartOptions.labels"
+        [stroke]="chartOptions.stroke"
+        [title]="chartOptions.title"
+        [dataLabels]="chartOptions.dataLabels"
+        [fill]="chartOptions.fill"
+        [tooltip]="chartOptions.tooltip"
+      ></apx-chart>
+    </div>
+  </mat-card>
+</form>
+<br/>
+<mat-card *ngIf="dailyTableDataReady">
+  <div class="card">
+    <div class="bg-app-bar px-6 h-16 border-b sticky left-0" fxLayout="row" fxLayoutAlign="start center">
+      <div class="bg-card rounded-full border px-4"
+           fxFlex="400px"
+           fxFlex.lt-md="auto"
+           fxHide.xs
+           fxLayout="row"
+           fxLayoutAlign="start center">
+        <input [formControl]="searchCtrl"
+               class="px-4 py-3 border-0 outline-none w-full bg-transparent"
+               placeholder="Search..."
+               type="search">
+      </div>
+      <span fxFlex></span>
+      <button class="ml-4" fxFlex="none" fxHide.gt-xs mat-icon-button type="button">
+      </button>
+    </div>
+    <table  mat-table [dataSource]="dataSource" class="w-full" [ngClass]='dailyTableDataReady ? "visible": "hidden"'
+            matSort>
+      <ng-container  matColumnDef="day">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+        <td class="cell" mat-cell *matCellDef="let element"> {{element.day}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastYearNetKargo">
+        <th mat-header-cell *matHeaderCellDef > Geçen Yıl Net Kargo </th>
+        <td class="cell"mat-cell *matCellDef="let element"> {{element.lastYearNetKargo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="currentYearNetKargo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Bu Yıl Net Kargo </th>
+        <td class="cell"mat-cell *matCellDef="let element"> {{element.currentYearNetKargo}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row class="hover:bg-hover trans-ease-out cursor-pointer" *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [length]="totalPosts" [pageSizeOptions]="pageSizeOptions" [pageSize]="pageSize" (page)="onTableChangedPage($event)" class="sticky left-0"></mat-paginator>
+  </div>
+</mat-card>
+
