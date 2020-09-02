@@ -9,3 +9,4 @@
  &nbsp;  -- Genel olarak grafikle ilgili daha detaylı açıklama gerekiyordu ancak yine zaman kısıtı sebebiyle hızlıca elimden geldiği kadar temel kabiliyetleri göstermeye çalıştım.<br />
 - Zamanım kısıtlı olduğu için Loader ve Alert servislerini implement etmedim.<br />
 - Authenticate servisini detaylı olarak yazmadığım için kullanıcı adı kısmını eklemedim.<br />
+- Cors problemi yaşadım, Access-Control-Allow-Origin ve diğer header'ları denememe rağmen belli aralıklarla hata almaya devam etti. Hata alırken --disable-host-check ile atlatabildim.
